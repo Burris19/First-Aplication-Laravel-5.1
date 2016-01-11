@@ -10,6 +10,8 @@ use TeachMe\Entities\Ticket;
 use Faker\Generator;
 class TicketTableSeeder extends BaseSeeder
 {
+    protected $total = 250;
+
     public function getModel()
     {
         return new Ticket();
@@ -25,8 +27,4 @@ class TicketTableSeeder extends BaseSeeder
         ];
     }
 
-    public function run()
-    {
-        $this->createMultiple(50);
-    }
 }
