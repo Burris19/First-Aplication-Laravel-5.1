@@ -1,9 +1,10 @@
-<?php namespace TeachMe\Entities;
+<?php
+
+namespace TeachMe\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 
-class TicketComments extends Model {
-
-	//
-
+class TicketComments extends Model
+{
+    //
 }

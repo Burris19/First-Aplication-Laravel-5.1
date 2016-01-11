@@ -4,15 +4,13 @@
  * Created by PhpStorm.
  * User: julian
  * Date: 11/01/16
- * Time: 12:03 AM
+ * Time: 12:03 AM.
  */
-
 use TeachMe\Entities\User;
-use Faker\Factory as Faker;
 use Faker\Generator;
 
-class UserTableSeeder extends BaseSeeder {
-
+class UserTableSeeder extends BaseSeeder
+{
     public function getModel()
     {
         return new User();
@@ -23,7 +21,7 @@ class UserTableSeeder extends BaseSeeder {
         return [
             'name' => $faker->name,
             'email' => $faker->email,
-            'password' => bcrypt('secret')
+            'password' => bcrypt('secret'),
         ];
     }
 
@@ -38,7 +36,7 @@ class UserTableSeeder extends BaseSeeder {
         $this->create([
             'name' => 'Julian Hernandez',
             'email' => 'admina@gmail.com',
-            'password' => bcrypt('admin')
+            'password' => bcrypt('admin'),
         ]);
     }
 }

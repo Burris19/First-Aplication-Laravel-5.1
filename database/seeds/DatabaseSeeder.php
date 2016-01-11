@@ -3,47 +3,43 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 
-class DatabaseSeeder extends Seeder {
+class DatabaseSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     */
+    public function run()
+    {
+        Model::unguard();
 
-	/**
-	 * Run the database seeds.
-	 *
-	 * @return void
-	 */
-	public function run()
-	{
-		Model::unguard();
+        $this->truncateTables(array(
+                'users',
+                'password_resets',
+                'tickets',
+                'ticket_votes',
+                'ticket_comments',
+        ));
 
-		$this->truncateTables(array(
-				'users',
-				'password_resets',
-				'tickets',
-				'ticket_votes',
-				'ticket_comments'
-		));
+        $this->call('UserTableSeeder');
+        $this->call('TicketTableSeeder');
+        $this->call('TicketVoteTableSeeder');
+        $this->call('TicketCommentTableSeeder');
+    }
 
-		$this->call('UserTableSeeder');
-		$this->call('TicketTableSeeder');
-		$this->call('TicketVoteTableSeeder');
-		$this->call('TicketCommentTableSeeder');
-	}
+    public function truncateTables(array $tables)
+    {
+        $this->checkForeignKeys(false);
 
-	public function truncateTables(array $tables)
-	{
-		$this->checkForeignKeys(false);
+        foreach ($tables as $table) {
+            DB::table($table)->truncate();
+        }
 
-		foreach ($tables as $table) {
-			DB::table($table)->truncate();
-		}
+        $this->checkForeignKeys(true);
+    }
 
-		$this->checkForeignKeys(true);
-
-	}
-
-	public function checkForeignKeys($check)
-	{
-		$check = $check ? '1' : '0';
-		DB::statement("SET FOREIGN_KEY_CHECKS = $check");
-	}
-
+    public function checkForeignKeys($check)
+    {
+        $check = $check ? '1' : '0';
+        DB::statement("SET FOREIGN_KEY_CHECKS = $check");
+    }
 }

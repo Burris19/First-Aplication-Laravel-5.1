@@ -4,15 +4,16 @@
  * Created by PhpStorm.
  * User: julian
  * Date: 11/01/16
- * Time: 01:04 AM
+ * Time: 01:04 AM.
  */
 use Faker\Factory as Faker;
 use Faker\Generator;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Collection;
 use PhpSpec\Exception\Exception;
-abstract class BaseSeeder extends Seeder{
 
+abstract class BaseSeeder extends Seeder
+{
     protected $total = 50;
 
     protected static $pool = array();
@@ -24,7 +25,7 @@ abstract class BaseSeeder extends Seeder{
 
     protected function createMultiple($total, array $customValues = array())
     {
-        for ($i = 1; $i <= $total; $i++){
+        for ($i = 1; $i <= $total; ++$i) {
             $this->create($customValues);
         }
     }
@@ -44,22 +45,18 @@ abstract class BaseSeeder extends Seeder{
 
     protected function createFrom($seeder, array $customValues = array())
     {
-        $seeder = new $seeder;
+        $seeder = new $seeder();
+
         return $seeder->create($customValues);
     }
 
     protected function getRandom($model)
     {
-        if ( ! $this->collectionExist($model))
-        {
-
+        if (!$this->collectionExist($model)) {
             throw new Exception("The $model collection does not exist");
-
         }
 
         return static::$pool[$model]->random();
-
-
     }
 
     protected function addToPool($entity)
@@ -67,8 +64,7 @@ abstract class BaseSeeder extends Seeder{
         $reflection = new ReflectionClass($entity);
         $class = $reflection->getShortName();
 
-        if ( ! $this->collectionExist($class))
-        {
+        if (!$this->collectionExist($class)) {
             static::$pool[$class] = new Collection();
         }
 
@@ -79,6 +75,7 @@ abstract class BaseSeeder extends Seeder{
 
     /**
      * @param $class
+     *
      * @return bool
      */
     protected function collectionExist($class)
