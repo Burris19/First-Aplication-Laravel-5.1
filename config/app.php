@@ -137,11 +137,6 @@ return [
 		'Illuminate\View\ViewServiceProvider',
 
 
-		/**
-		 * Vendor Service Providers..
-		 */
-
-			'Collective\Html\HtmlServiceProvider',
 
 		/*
 		 * Application Service Providers...
@@ -151,6 +146,7 @@ return [
 		'TeachMe\Providers\ConfigServiceProvider',
 		'TeachMe\Providers\EventServiceProvider',
 		'TeachMe\Providers\RouteServiceProvider',
+		'TeachMe\Providers\HtmlServiceProvider',
 
 	],
 
