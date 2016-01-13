@@ -1,5 +1,6 @@
 <?php namespace TeachMe\Http\Controllers;
 
+use TeachMe\Entities\Ticket;
 use TeachMe\Http\Requests;
 use TeachMe\Http\Controllers\Controller;
 
@@ -10,7 +11,8 @@ class TicketsController extends Controller {
 	public function latest()
     {
 
-        return view('tickets/list');
+        $tickets = Ticket::orderBy('created_at', 'DESC')->paginate();
+        return view('tickets/list', compact('tickets'));
 
     }
 
@@ -37,8 +39,8 @@ class TicketsController extends Controller {
 
     public function details($id)
     {
-
-        return view('tickets/details');
+        $ticket = Ticket::findOrFail($id);
+        return view('tickets/details', compact('ticket'));
 
     }
 }
