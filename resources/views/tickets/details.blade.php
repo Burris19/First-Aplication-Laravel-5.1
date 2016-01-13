@@ -5,9 +5,8 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <h2 class="title-show">
-                Magnam impedit voluptatibus architecto quidem iste eum ut.
-                <span class="label label-info absolute highlight">abierta</span>
-
+                {{ $ticket->title }}
+                @include('tickets/partials/status', compact('ticket'))
             </h2>
             <h4 class="label label-info news">
                 9 votos            </h4>
