@@ -8,8 +8,17 @@
                 {{ $ticket->title }}
                 @include('tickets/partials/status', compact('ticket'))
             </h2>
+
+            <p class="date-t">
+                <span class="glyphicon glyphicon-time"></span> {{ $ticket->created_at->format('d/m/y h:ia') }}
+                - {{ $ticket->author->name }}
+            </p>
+
+
+
             <h4 class="label label-info news">
-                {{ count($ticket->voters) }} votos            </h4>
+                {{ count($ticket->voters) }} votos
+            </h4>
 
             <p class="vote-users">
 
@@ -46,7 +55,7 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Enviar comentario</button>
 
-            {!! Form::closs() !!}
+            {!! Form::close() !!}
 
 
             <h3>Comentarios ({{ count($ticket->comments) }})</h3>
@@ -58,6 +67,8 @@
                     <p>{{ $comment->comment }}</p>
                     <p class="date-t"><span class="glyphicon glyphicon-time"></span>
                         {{ $comment->created_at->format('d/m/y h:ia') }}
+
+
                     </p>
                 </div>
 
