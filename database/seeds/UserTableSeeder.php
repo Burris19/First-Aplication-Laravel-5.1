@@ -35,7 +35,7 @@ class UserTableSeeder extends BaseSeeder
     {
         $this->create([
             'name' => 'Julian Hernandez',
-            'email' => 'admina@gmail.com',
+            'email' => 'admin@gmail.com',
             'password' => bcrypt('admin'),
         ]);
     }
