@@ -15,8 +15,8 @@
         {{--</a>--}}
 
         <a href="{{ route('tickets.details', $ticket) }}">
-            <span class="votes-count">6 votos</span>
-            - <span class="comments-count">4 comentarios</span>.
+            <span class="votes-count">{{ $ticket->voters()->count() }} votos</span>
+            - <span class="comments-count">{{ $ticket->voters()->count() }} comentarios</span>.
         </a>
 
     <p class="date-t"><span class="glyphicon glyphicon-time"></span> {{ $ticket->created_at->format('d/m/Y h:ia') }}</p>
