@@ -5,6 +5,11 @@ namespace TeachMe\Entities;
 class TicketComments extends Entity
 {
 
+    protected $fillable = [
+        'comment',
+        'link'
+    ];
+
     public function ticket()
     {
 
