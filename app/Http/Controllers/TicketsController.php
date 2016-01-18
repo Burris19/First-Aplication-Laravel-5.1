@@ -40,7 +40,7 @@ class TicketsController extends Controller {
 
     }
 
-    public function details($id)
+    public function details($id, Guard $auth)
     {
         $ticket = Ticket::findOrFail($id);
 //        $comments = TicketComments::select('ticket_comments.*', 'users.name')
@@ -48,7 +48,13 @@ class TicketsController extends Controller {
 //            ->where('ticket_id', $id)
 //            ->get();
 
-        return view('tickets/details', compact('ticket'));
+        //obtener el id del usuario logueado
+//        $user = Auth::user();
+//        $user = auth()->user();
+        $user = $auth->user();
+
+
+        return view('tickets/details', compact('ticket', 'user'));
 
     }
 

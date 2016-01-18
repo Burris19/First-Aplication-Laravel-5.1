@@ -1,5 +1,6 @@
 <?php namespace TeachMe\Http\Controllers;
 
+use TeachMe\Entities\Ticket;
 use TeachMe\Http\Requests;
 use TeachMe\Http\Controllers\Controller;
 
@@ -7,17 +8,25 @@ use Illuminate\Http\Request;
 
 class VotesController extends Controller {
 
-	public function submit($id)
-    {
 
-        dd('Votando por el ticket: ' . $id);
+    public function submit($id)
+    {
+        $ticket = Ticket::findOrFail($id);
+
+        currentUser()->vote($ticket);
+
+        return redirect()->back();
 
     }
 
     public function destroy($id)
     {
 
-        dd('Quitando el voto por el ticket: ' . $id);
+        $ticket = Ticket::findOrFail($id);
+
+        currentUser()->unVote($ticket);
+
+        return redirect()->back();
 
     }
 
