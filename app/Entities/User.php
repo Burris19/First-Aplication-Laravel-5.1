@@ -6,6 +6,7 @@ use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use TeachMe\Entities\Ticket;
 
 class User extends Entity implements AuthenticatableContract, CanResetPasswordContract
 {
@@ -42,7 +43,38 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
     public function voted()
     {
 
-        return $this->belongsToMany(Ticket::getClass(), 'ticket_votes');
+        return $this->belongsToMany(Ticket::getClass(), 'ticket_votes')->withTimestamps();
 
     }
+
+    public function hasVoted(Ticket $ticket)
+    {
+//        dd($ticket);
+
+        return $this->voted()->where('ticket_id', $ticket->id)->count();
+
+//        return TicketVote::where(['user_id' => $this->id, 'ticket_id' => $ticket->id])->count();
+
+    }
+
+
+    public function vote(Ticket $ticket)
+    {
+
+        if($this->hasVoted($ticket)) return false;
+
+        $this->voted()->attach($ticket);
+
+        return true;
+
+    }
+
+
+    public function unVote(Ticket $ticket)
+    {
+
+        $this->voted()->detach($ticket);
+
+    }
+
 }
